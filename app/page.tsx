@@ -652,7 +652,7 @@ export default function HomePage() {
 
             <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
               <div className="text-gray-400 text-sm mb-4 md:mb-0 animate-fade-in-left">
-                © 2024 Prajjwal Kandpal. Securing the digital frontier.
+                © 2025 Prajjwal Kandpal. Securing the digital frontier.
               </div>
               <div className="flex gap-6 text-gray-400 text-sm animate-fade-in-right">
                 <span className="hover:text-red-400 transition-colors cursor-pointer">Privacy Policy</span>
