@@ -628,7 +628,7 @@ export default function HomePage() {
                     </div>
                   </a>
                   <a
-                    href="https://instagram.com/prajjwal_kandpal"
+                    href="https://instagram.com/prjwllllll"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group"
