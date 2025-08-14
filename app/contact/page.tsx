@@ -12,7 +12,7 @@ export default function ContactPage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
               <Terminal className="h-6 w-6 text-cyan-400" />
-              <span className="font-bold text-xl text-white">Alex Chen</span>
+              <span className="font-bold text-xl text-white">Prajjwal Kandpal</span>
             </div>
             <div className="hidden md:flex space-x-8">
               <a href="/" className="text-gray-300 hover:text-cyan-400 transition-colors">
