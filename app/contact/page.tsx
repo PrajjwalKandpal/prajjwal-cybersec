@@ -85,7 +85,7 @@ export default function ContactPage() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
               <Terminal className="h-5 w-5 text-cyan-400" />
-              <span className="text-white font-semibold">Alex Chen - Cybersecurity Specialist</span>
+              <span className="text-white font-semibold">Prajjwal Kandpal - Cybersecurity Specialist</span>
             </div>
             <div className="text-gray-400 font-mono text-sm">$ echo "Defending the Digital Frontier" | base64</div>
           </div>
