@@ -5,7 +5,7 @@ import "./globals.css"
 import MatrixRain from "@/components/matrix-rain"
 import CustomCursor from "@/components/custom-cursor"
 import WebSphere from "@/components/web-sphere"
-
+//new changes
 const dmSans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
