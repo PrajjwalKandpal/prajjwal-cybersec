@@ -14,7 +14,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Alex Chen - Cybersecurity Specialist",
+  title: "Prajjwal Kandpal - Cybersecurity Specialist",
   description: "Expert cybersecurity solutions - Defending the Digital Frontier",
   generator: "v0.app",
 }
