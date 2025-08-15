@@ -4,22 +4,54 @@ import { useEffect, useState } from "react"
 import { Shield, Search, Terminal, Award, Target, Eye, Github, Linkedin, Instagram, ExternalLink } from "lucide-react"
 import ContactForm from "@/components/contact-form"
 import WebSphere from "@/components/web-sphere"
-import ConsultationModal from "@/components/consultation-modal"
+import ConsultationForm from "@/components/consultation-form"
 
 export default function HomePage() {
   const [typedText, setTypedText] = useState("")
   const [showCursor, setShowCursor] = useState(true)
   const [scrollY, setScrollY] = useState(0)
   const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({})
-  const [showConsultationModal, setShowConsultationModal] = useState(false)
+  const [showConsultationPopup, setShowConsultationPopup] = useState(false)
 
   const fullText = "Defending the Digital Frontier"
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  const getTechnologyUrl = (tech: string) => {
+    const techUrls: { [key: string]: string } = {
+      Python: "https://www.python.org/",
+      "C++": "https://cplusplus.com/",
+      Tkinter: "https://docs.python.org/3/library/tkinter.html",
+      PIL: "https://pillow.readthedocs.io/",
+      "LSB Encryption": "https://en.wikipedia.org/wiki/Bit_manipulation",
+      "Burp Suite": "https://portswigger.net/burp",
+      Wireshark: "https://www.wireshark.org/",
+      "Reverse Engineering Tools": "https://ghidra-sre.org/",
+      "OWASP ZAP": "https://www.zaproxy.org/",
+      Nmap: "https://nmap.org/",
+      "Custom Scripts": "https://github.com/",
+      Hashcat: "https://hashcat.net/hashcat/",
+      "John the Ripper": "https://www.openwall.com/john/",
+      Metasploit: "https://www.metasploit.com/",
+      "Kali Linux": "https://www.kali.org/",
+      "Aircrack-ng": "https://www.aircrack-ng.org/",
+      "Custom Wordlists": "https://github.com/danielmiessler/SecLists",
+      "Wireless Tools": "https://www.aircrack-ng.org/",
+      "AI/ML Frameworks": "https://tensorflow.org/",
+      "Research Methodologies": "https://scholar.google.com/",
+    }
+    return techUrls[tech] || `https://www.google.com/search?q=${encodeURIComponent(tech)}`
+  }
 
   useEffect(() => {
     let i = 0
     const timer = setInterval(() => {
       if (i < fullText.length) {
-        // Add random glitch characters occasionally
         if (Math.random() < 0.1) {
           const glitchChars = "!@#$%^&*()_+-=[]{}|;:,.<>?"
           const glitchChar = glitchChars[Math.floor(Math.random() * glitchChars.length)]
@@ -45,7 +77,6 @@ export default function HomePage() {
     const handleScroll = () => {
       setScrollY(window.scrollY)
 
-      // Intersection observer for scroll-triggered animations
       const sections = document.querySelectorAll("[data-animate]")
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect()
@@ -58,7 +89,7 @@ export default function HomePage() {
     }
 
     window.addEventListener("scroll", handleScroll)
-    handleScroll() // Initial check
+    handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -98,40 +129,6 @@ export default function HomePage() {
     const interval = setInterval(createChar, 150)
     return () => clearInterval(interval)
   }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
-
-  const getTechnologyUrl = (tech: string): string => {
-    const techUrls: { [key: string]: string } = {
-      Python: "https://www.python.org/",
-      "C++": "https://cplusplus.com/",
-      Tkinter: "https://docs.python.org/3/library/tkinter.html",
-      PIL: "https://pillow.readthedocs.io/",
-      "LSB Encryption": "https://en.wikipedia.org/wiki/Bit_manipulation",
-      "Burp Suite": "https://portswigger.net/burp",
-      Wireshark: "https://www.wireshark.org/",
-      "Reverse Engineering Tools": "https://ghidra-sre.org/",
-      "OWASP ZAP": "https://www.zaproxy.org/",
-      Nmap: "https://nmap.org/",
-      "Custom Scripts": "https://github.com/",
-      Hashcat: "https://hashcat.net/hashcat/",
-      "John the Ripper": "https://www.openwall.com/john/",
-      Metasploit: "https://www.metasploit.com/",
-      "Kali Linux": "https://www.kali.org/",
-      "Aircrack-ng": "https://www.aircrack-ng.org/",
-      "Custom Wordlists": "https://github.com/danielmiessler/SecLists",
-      "Wireless Tools": "https://www.aircrack-ng.org/",
-      "AI/ML Frameworks": "https://tensorflow.org/",
-      "Research Methodologies": "https://scholar.google.com/",
-      Nessus: "https://www.tenable.com/products/nessus",
-    }
-    return techUrls[tech] || `https://www.google.com/search?q=${encodeURIComponent(tech)}`
-  }
 
   const skills = {
     "Penetration Testing": [
@@ -273,6 +270,31 @@ export default function HomePage() {
   return (
     <div className="min-h-screen cyber-bg">
       <div className="matrix-bg"></div>
+
+      {showConsultationPopup && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 border border-red-600 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="terminal-header">
+              <div className="terminal-dot red"></div>
+              <div className="terminal-dot yellow"></div>
+              <div className="terminal-dot green"></div>
+              <span className="text-gray-400 text-sm ml-4">consultation_scheduler.exe</span>
+              <button
+                onClick={() => setShowConsultationPopup(false)}
+                className="ml-auto mr-4 text-gray-400 hover:text-red-400 transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-6">
+              <h3 className="text-2xl font-bold text-white mb-4 glitch-text" data-text="Schedule Consultation">
+                Schedule Consultation
+              </h3>
+              <ConsultationForm onClose={() => setShowConsultationPopup(false)} />
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className="h-screen relative overflow-hidden">
         <div className="h-full flex items-center justify-center">
@@ -590,9 +612,10 @@ export default function HomePage() {
                             href={getTechnologyUrl(tech)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs font-mono hover:bg-red-600/20 hover:text-red-400 transition-colors cursor-pointer"
+                            className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs font-mono hover:bg-red-600/20 hover:text-red-400 transition-colors cursor-pointer inline-flex items-center gap-1"
                           >
                             {tech}
+                            <ExternalLink className="h-3 w-3" />
                           </a>
                         ))}
                       </div>
@@ -650,7 +673,7 @@ export default function HomePage() {
               style={{ animationDelay: "0.4s" }}
             >
               <button
-                onClick={() => setShowConsultationModal(true)}
+                onClick={() => setShowConsultationPopup(true)}
                 className="cyber-button cursor-pointer px-8 py-3 rounded-lg font-semibold transition-all duration-300"
               >
                 Schedule Consultation
@@ -755,8 +778,6 @@ export default function HomePage() {
           </div>
         </footer>
       </div>
-
-      <ConsultationModal isOpen={showConsultationModal} onClose={() => setShowConsultationModal(false)} />
     </div>
   )
 }

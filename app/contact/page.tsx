@@ -12,7 +12,7 @@ export default function ContactPage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
               <Terminal className="h-6 w-6 text-cyan-400" />
-              <span className="font-bold text-xl text-white">Prajjwal Kandpal</span>
+              <span className="font-bold text-xl text-white">Alex Chen</span>
             </div>
             <div className="hidden md:flex space-x-8">
               <a href="/" className="text-gray-300 hover:text-cyan-400 transition-colors">
@@ -85,7 +85,7 @@ export default function ContactPage() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
               <Terminal className="h-5 w-5 text-cyan-400" />
-              <span className="text-white font-semibold">Prajjwal Kandpal - Cybersecurity Specialist</span>
+              <span className="text-white font-semibold">Alex Chen - Cybersecurity Specialist</span>
             </div>
             <div className="text-gray-400 font-mono text-sm">$ echo "Defending the Digital Frontier" | base64</div>
           </div>
