@@ -4,12 +4,14 @@ import { useEffect, useState } from "react"
 import { Shield, Search, Terminal, Award, Target, Eye, Github, Linkedin, Instagram, ExternalLink } from "lucide-react"
 import ContactForm from "@/components/contact-form"
 import WebSphere from "@/components/web-sphere"
+import ConsultationModal from "@/components/consultation-modal"
 
 export default function HomePage() {
   const [typedText, setTypedText] = useState("")
   const [showCursor, setShowCursor] = useState(true)
   const [scrollY, setScrollY] = useState(0)
   const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({})
+  const [showConsultationModal, setShowConsultationModal] = useState(false)
 
   const fullText = "Defending the Digital Frontier"
 
@@ -96,6 +98,40 @@ export default function HomePage() {
     const interval = setInterval(createChar, 150)
     return () => clearInterval(interval)
   }, [])
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  const getTechnologyUrl = (tech: string): string => {
+    const techUrls: { [key: string]: string } = {
+      Python: "https://www.python.org/",
+      "C++": "https://cplusplus.com/",
+      Tkinter: "https://docs.python.org/3/library/tkinter.html",
+      PIL: "https://pillow.readthedocs.io/",
+      "LSB Encryption": "https://en.wikipedia.org/wiki/Bit_manipulation",
+      "Burp Suite": "https://portswigger.net/burp",
+      Wireshark: "https://www.wireshark.org/",
+      "Reverse Engineering Tools": "https://ghidra-sre.org/",
+      "OWASP ZAP": "https://www.zaproxy.org/",
+      Nmap: "https://nmap.org/",
+      "Custom Scripts": "https://github.com/",
+      Hashcat: "https://hashcat.net/hashcat/",
+      "John the Ripper": "https://www.openwall.com/john/",
+      Metasploit: "https://www.metasploit.com/",
+      "Kali Linux": "https://www.kali.org/",
+      "Aircrack-ng": "https://www.aircrack-ng.org/",
+      "Custom Wordlists": "https://github.com/danielmiessler/SecLists",
+      "Wireless Tools": "https://www.aircrack-ng.org/",
+      "AI/ML Frameworks": "https://tensorflow.org/",
+      "Research Methodologies": "https://scholar.google.com/",
+      Nessus: "https://www.tenable.com/products/nessus",
+    }
+    return techUrls[tech] || `https://www.google.com/search?q=${encodeURIComponent(tech)}`
+  }
 
   const skills = {
     "Penetration Testing": [
@@ -190,12 +226,48 @@ export default function HomePage() {
   ]
 
   const certifications = [
-    { name: "Google Cybersecurity", issuer: "Google", year: "2024", icon: Shield },
-    { name: "CEH Essentials", issuer: "EC-Council", year: "2024", icon: Target },
-    { name: "Cisco Cybersecurity", issuer: "Cisco", year: "2024", icon: Terminal },
-    { name: "Azure Fundamentals", issuer: "Microsoft", year: "2024", icon: Award },
-    { name: "Python for Data Science", issuer: "IBM", year: "2024", icon: Eye },
-    { name: "Remote Sensing & GIS", issuer: "ISRO", year: "2021", icon: Search },
+    {
+      name: "Google Cybersecurity",
+      issuer: "Google",
+      year: "2024",
+      icon: Shield,
+      url: "https://www.coursera.org/account/accomplishments/specialization/S0GDMQORX5FR",
+    },
+    {
+      name: "EHE Essentials",
+      issuer: "EC-Council",
+      year: "2024",
+      icon: Target,
+      url: "https://learn.eccouncil.org/certificate/03daf459-5b50-4967-b110-afc0238bf39f?logged=true",
+    },
+    {
+      name: "Cisco Cybersecurity",
+      issuer: "Cisco",
+      year: "2024",
+      icon: Terminal,
+      url: "https://www.credly.com/badges/e1a823f4-02cf-4abb-9708-6146213aa0c0/linked_in_profile",
+    },
+    {
+      name: "Azure Fundamentals",
+      issuer: "Microsoft",
+      year: "2024",
+      icon: Award,
+      url: "https://learn.microsoft.com/en-us/training/achievements/learn.wwl.describe-cloud-computing.badge?username=PrajjwalKandpal-0873&sharingId=91F0793367C0B0D1",
+    },
+    {
+      name: "Python for Data Science",
+      issuer: "IBM",
+      year: "2024",
+      icon: Eye,
+      url: "https://www.credly.com/badges/a7fbd62b-180a-4dda-8875-1a204eb1b2e9/linked_in_profile",
+    },
+    {
+      name: "Remote Sensing & GIS",
+      issuer: "ISRO",
+      year: "2021",
+      icon: Search,
+      url: "https://www.linkedin.com/posts/prajjwal-kandpal-529624284_certificate-of-completion-of-course-on-usefulness-activity-7107765412011913216-ozGa?utm_source=share&utm_medium=member_desktop",
+    },
   ]
 
   return (
@@ -273,10 +345,16 @@ export default function HomePage() {
                   className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
                   style={{ animationDelay: "0.9s" }}
                 >
-                  <button className="cyber-button cursor-pointer px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                  <button
+                    onClick={() => scrollToSection("projects")}
+                    className="cyber-button cursor-pointer px-8 py-3 rounded-lg font-semibold transition-all duration-300"
+                  >
                     View My Work
                   </button>
-                  <button className="border border-red-600 text-red-400 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer hover-glow">
+                  <button
+                    onClick={() => scrollToSection("contact")}
+                    className="border border-red-600 text-red-400 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer hover-glow"
+                  >
                     Contact Me
                   </button>
                 </div>
@@ -433,12 +511,17 @@ export default function HomePage() {
                       className="text-center group animate-fade-in-up"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 hover:border-red-600 transition-all duration-300 hover-glow cursor-pointer">
+                      <a
+                        href={cert.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-gray-800 border border-gray-700 rounded-lg p-4 hover:border-red-600 transition-all duration-300 hover-glow cursor-pointer"
+                      >
                         <IconComponent className="h-8 w-8 text-red-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
                         <div className="text-white font-semibold text-sm">{cert.name}</div>
                         <div className="text-gray-400 text-xs">{cert.issuer}</div>
                         <div className="text-red-400 text-xs">{cert.year}</div>
-                      </div>
+                      </a>
                     </div>
                   )
                 })}
@@ -502,12 +585,15 @@ export default function HomePage() {
                       <div className="text-red-400 text-sm font-semibold mb-2">Technologies Used:</div>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech) => (
-                          <span
+                          <a
                             key={tech}
+                            href={getTechnologyUrl(tech)}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs font-mono hover:bg-red-600/20 hover:text-red-400 transition-colors cursor-pointer"
                           >
                             {tech}
-                          </span>
+                          </a>
                         ))}
                       </div>
                     </div>
@@ -563,10 +649,16 @@ export default function HomePage() {
               className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
               style={{ animationDelay: "0.4s" }}
             >
-              <button className="cyber-button cursor-pointer px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+              <button
+                onClick={() => setShowConsultationModal(true)}
+                className="cyber-button cursor-pointer px-8 py-3 rounded-lg font-semibold transition-all duration-300"
+              >
                 Schedule Consultation
               </button>
-              <button className="border border-red-600 text-red-400 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer hover-glow">
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="border border-red-600 text-red-400 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer hover-glow"
+              >
                 View Portfolio
               </button>
             </div>
@@ -628,7 +720,7 @@ export default function HomePage() {
                     </div>
                   </a>
                   <a
-                    href="https://instagram.com/prjwllllll"
+                    href="https://instagram.com/prajjwal_kandpal"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group"
@@ -652,7 +744,7 @@ export default function HomePage() {
 
             <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
               <div className="text-gray-400 text-sm mb-4 md:mb-0 animate-fade-in-left">
-                © 2025 Prajjwal Kandpal. Securing the digital frontier.
+                © 2024 Prajjwal Kandpal. Securing the digital frontier.
               </div>
               <div className="flex gap-6 text-gray-400 text-sm animate-fade-in-right">
                 <span className="hover:text-red-400 transition-colors cursor-pointer">Privacy Policy</span>
@@ -663,6 +755,8 @@ export default function HomePage() {
           </div>
         </footer>
       </div>
+
+      <ConsultationModal isOpen={showConsultationModal} onClose={() => setShowConsultationModal(false)} />
     </div>
   )
 }
