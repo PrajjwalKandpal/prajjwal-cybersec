@@ -226,12 +226,12 @@ export default function ContactForm() {
                       <SelectValue placeholder="Select budget range" />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-900 border-red-600/50">
-                      <SelectItem value="under-5k">Under $5,000</SelectItem>
-                      <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
-                      <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
-                      <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-                      <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                      <SelectItem value="100k-plus">$100,000+</SelectItem>
+                      <SelectItem value="under-6k">Under ₹6,000</SelectItem>
+                      <SelectItem value="6k-15k">₹6,000 - ₹15,000</SelectItem>
+                      <SelectItem value="15k-30k">₹15,000 - ₹30,000</SelectItem>
+                      <SelectItem value="30k-50k">₹30,000 - ₹50,000</SelectItem>
+                      <SelectItem value="50k-70k">₹50,000 - ₹70,000</SelectItem>
+                      <SelectItem value="70k-plus">₹70,000+</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

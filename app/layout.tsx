@@ -5,7 +5,7 @@ import "./globals.css"
 import MatrixRain from "@/components/matrix-rain"
 import CustomCursor from "@/components/custom-cursor"
 import WebSphere from "@/components/web-sphere"
-//new changes
+
 const dmSans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
@@ -14,7 +14,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Prajjwal Kandpal - Cybersecurity Specialist",
+  title: "Alex Chen - Cybersecurity Specialist",
   description: "Expert cybersecurity solutions - Defending the Digital Frontier",
   generator: "v0.app",
 }
